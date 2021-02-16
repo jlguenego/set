@@ -1,14 +1,22 @@
 {
-  "name": "",
-  "version": "0.0.0",
-  "description": "",
+  "name": "@jlguenego/set",
+  "version": "0.0.1",
+  "description": "More operations on Sets: union, intersection, include, etc.",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
+  "module": "build_esm/src/index.js",
+  "private": false,
   "files": [
-    "build/src"
+    "build/src",
+    "build_esm/src"
   ],
-  "license": "Apache-2.0",
-  "keywords": [],
+  "license": "ISC",
+  "keywords": [
+    "set",
+    "union",
+    "intersection",
+    "include"
+  ],
   "scripts": {
     "test": "nyc mocha",
     "lint": "gts lint",

@@ -23,9 +23,9 @@ It is ready to use for both browsers and node app.
 ```ts
 const a = new Set([1, 2, 3]);
 const b = new Set([3, 4, 5]);
-const c = Setx.union(a, b);
+const c = Sets.union(a, b);
 const d = new Set([1, 2, 3, 4, 5]);
-const result = Setx.areEquals(c, d);
+const result = Sets.areEquals(c, d);
 // result is true
 ```
 
