@@ -11,4 +11,32 @@ export class Sets {
     }
     return result;
   }
+  static areEquals<T>(a: Set<T>, b: Set<T>): boolean {
+    if (a.size !== b.size) {
+      return false;
+    }
+    return Sets.includes(a, b) && Sets.includes(b, a);
+  }
+
+  /**
+   * test if a ⊂ b
+   *
+   * @static
+   * @template T
+   * @param {Set<T>} a
+   * @param {Set<T>} b
+   * @returns {boolean}
+   * @memberof Sets
+   */
+  static includes<T>(a: Set<T>, b: Set<T>): boolean {
+    if (a.size > b.size) {
+      return false;
+    }
+    for (const e of a) {
+      if (!b.has(e)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
