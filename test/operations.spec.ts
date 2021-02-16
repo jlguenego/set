@@ -26,4 +26,10 @@ describe('Operations Unit Test', () => {
     const c = Sets.includes(a, b);
     assert.deepStrictEqual(c, true);
   });
+  it('test intersection', () => {
+    const a = new Set([1, 2, 6]);
+    const b = new Set([3, 2, 1]);
+    const c = Sets.intersection(a, b);
+    assert.deepStrictEqual(c, new Set([1, 2]));
+  });
 });

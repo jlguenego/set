@@ -11,6 +11,23 @@ export class Sets {
     }
     return result;
   }
+  static intersection<T>(...sets: Set<T>[]): Set<T> {
+    const result = new Set<T>();
+    for (const e of sets[0]) {
+      let found = true;
+      for (const set of sets.slice(1)) {
+        if (!set.has(e)) {
+          found = false;
+          break;
+        }
+      }
+      if (found) {
+        result.add(e);
+      }
+    }
+    return result;
+  }
+
   static areEquals<T>(a: Set<T>, b: Set<T>): boolean {
     if (a.size !== b.size) {
       return false;
