@@ -32,4 +32,10 @@ describe('Operations Unit Test', () => {
     const c = Sets.intersection(a, b);
     assert.deepStrictEqual(c, new Set([1, 2]));
   });
+  it('test complementary', () => {
+    const a = new Set([1, 2, 6]);
+    const b = new Set([3, 2, 1]);
+    const c = Sets.complementary(a, b);
+    assert.deepStrictEqual(c, new Set([3]));
+  });
 });

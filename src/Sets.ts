@@ -28,6 +28,16 @@ export class Sets {
     return result;
   }
 
+  static complementary<T>(a: Set<T>, b: Set<T>): Set<T> {
+    const result = new Set<T>();
+    for (const e of b) {
+      if (!a.has(e)) {
+        result.add(e);
+      }
+    }
+    return result;
+  }
+
   static areEquals<T>(a: Set<T>, b: Set<T>): boolean {
     if (a.size !== b.size) {
       return false;
