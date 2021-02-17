@@ -1,5 +1,8 @@
+import {areDisjoint} from './areDisjoint';
 import {cartesianProduct} from './cartesianProduct';
-import {getDistinctCouples} from './couples';
+import {includes} from './includes';
+import {intersection} from './intersection';
+import {powerSet} from './powerSet';
 
 export class Sets {
   /**
@@ -33,31 +36,7 @@ export class Sets {
     return result;
   }
 
-  /**
-   * Builds a new set = a ∩ b
-   *
-   * @static
-   * @template T
-   * @param {...Set<T>[]} sets
-   * @returns {Set<T>}
-   * @memberof Sets
-   */
-  static intersection<T>(...sets: Set<T>[]): Set<T> {
-    const result = new Set<T>();
-    for (const e of sets[0]) {
-      let found = true;
-      for (const set of sets.slice(1)) {
-        if (!set.has(e)) {
-          found = false;
-          break;
-        }
-      }
-      if (found) {
-        result.add(e);
-      }
-    }
-    return result;
-  }
+  static intersection = intersection;
 
   /**
    * Build a - b.
@@ -99,72 +78,11 @@ export class Sets {
     return Sets.includes(a, b) && Sets.includes(b, a);
   }
 
-  /**
-   * test if a ⊂ b
-   *
-   * @static
-   * @template T
-   * @param {Set<T>} a
-   * @param {Set<T>} b
-   * @returns {boolean}
-   * @memberof Sets
-   */
-  static includes<T>(a: Set<T>, b: Set<T>): boolean {
-    if (a.size > b.size) {
-      return false;
-    }
-    for (const e of a) {
-      if (!b.has(e)) {
-        return false;
-      }
-    }
-    return true;
-  }
+  static includes = includes;
 
-  /**
-   * Test if all sets are disjoint.
-   * If 2 sets have not empty intersection, then return false.
-   *
-   * @static
-   * @template T
-   * @param {...Set<T>[]} sets
-   * @memberof Sets
-   */
-  static areDisjoint<T>(firstSet: Set<T>, ...otherSets: Set<T>[]) {
-    for (const {a, b} of getDistinctCouples(firstSet, ...otherSets)) {
-      if (Sets.intersection(a, b).size > 0) {
-        return false;
-      }
-    }
-    return true;
-  }
+  static areDisjoint = areDisjoint;
 
-  /**
-   * returns P(A): the powerset of A.
-   * P(A) = {E|E⊂A}
-   *
-   * @static
-   * @template T
-   * @param {Set<T>} set
-   * @returns {Set<Set<T>>}
-   * @memberof Sets
-   */
-  static powerSet<T>(set: Set<T>): Set<Set<T>> {
-    const result = new Set<Set<T>>();
-    const array = [...set];
-    for (let i = 0; i < 2 ** set.size; i++) {
-      const subset = new Set<T>();
-      for (let j = 0; j < array.length; j++) {
-        const x = (i % 2 ** (j + 1)) / 2 ** j;
-        const bit = Math.floor(x);
-        if (bit === 1) {
-          subset.add(array[j]);
-        }
-      }
-      result.add(subset);
-    }
-    return result;
-  }
+  static powerSet = powerSet;
 
   static cartesianProduct = cartesianProduct;
 }
