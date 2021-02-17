@@ -5,4 +5,8 @@ export class Relation<T, U> {
   test(a: T, b: U) {
     return this.spec(a, b);
   }
+  getInverse(): Relation<U, T> {
+    const inverseSpec = (b: U, a: T) => this.spec(a, b);
+    return new Relation(inverseSpec);
+  }
 }
