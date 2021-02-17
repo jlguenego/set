@@ -1,3 +1,4 @@
+import {cartesianProduct} from './cartesianProduct';
 import {getDistinctCouples} from './couples';
 
 export class Sets {
@@ -137,4 +138,23 @@ export class Sets {
     }
     return true;
   }
+
+  static powerSet<T>(set: Set<T>): Set<Set<T>> {
+    const result = new Set<Set<T>>();
+    const array = [...set];
+    for (let i = 0; i < 2 ** set.size; i++) {
+      const subset = new Set<T>();
+      for (let j = 0; j < array.length; j++) {
+        const x = (i % 2 ** (j + 1)) / 2 ** j;
+        const bit = Math.floor(x);
+        if (bit === 1) {
+          subset.add(array[j]);
+        }
+      }
+      result.add(subset);
+    }
+    return result;
+  }
+
+  static cartesianProduct = cartesianProduct;
 }

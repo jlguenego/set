@@ -1,4 +1,8 @@
-import {expectedDisjointCouples} from './data/misc';
+import {
+  expectedDisjointCouples,
+  expectedPowerset,
+  expectedCartesianProduct,
+} from './data/misc';
 import {getDistinctCouples} from './../src/couples';
 import assert from 'assert';
 import {Sets} from '../src';
@@ -56,5 +60,21 @@ describe('Operations Unit Test', () => {
     const a = [1, 2, 3, 4, 5];
     const result = getDistinctCouples(...a);
     assert.deepStrictEqual(result, expectedDisjointCouples);
+  });
+  it('test powerset', () => {
+    const a = new Set([1, 2, 3]);
+    const result = Sets.powerSet(a);
+    assert.deepStrictEqual(result, expectedPowerset);
+  });
+  it('test powersetEmptySet', () => {
+    const a = new Set();
+    const result = Sets.powerSet(a);
+    assert.deepStrictEqual(result, new Set([new Set()]));
+  });
+  it('test cartesianProduct', () => {
+    const a = new Set([1, 2]);
+    const b = new Set(['a', 'b', 'c']);
+    const result = Sets.cartesianProduct(a, b);
+    assert.deepStrictEqual(result, expectedCartesianProduct);
   });
 });
