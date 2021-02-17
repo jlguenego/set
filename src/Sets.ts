@@ -139,6 +139,16 @@ export class Sets {
     return true;
   }
 
+  /**
+   * returns P(A): the powerset of A.
+   * P(A) = {E|E⊂A}
+   *
+   * @static
+   * @template T
+   * @param {Set<T>} set
+   * @returns {Set<Set<T>>}
+   * @memberof Sets
+   */
   static powerSet<T>(set: Set<T>): Set<Set<T>> {
     const result = new Set<Set<T>>();
     const array = [...set];
