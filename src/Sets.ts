@@ -1,3 +1,5 @@
+import {getDistinctCouples} from './couples';
+
 export class Sets {
   /**
    * add all elements of source to target
@@ -57,7 +59,10 @@ export class Sets {
   }
 
   /**
-   * Build the set of elements of b that are not element of a.
+   * Build a - b.
+   *
+   * a - b is a set that contains all elements of a that are not elements of b.
+   * a - b = {x∊a|x∉b}
    *
    * @static
    * @template T
@@ -66,7 +71,7 @@ export class Sets {
    * @returns {Set<T>}
    * @memberof Sets
    */
-  static complementary<T>(a: Set<T>, b: Set<T>): Set<T> {
+  static difference<T>(a: Set<T>, b: Set<T>): Set<T> {
     const result = new Set<T>();
     for (const e of b) {
       if (!a.has(e)) {
@@ -109,6 +114,24 @@ export class Sets {
     }
     for (const e of a) {
       if (!b.has(e)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Test if all sets are disjoint.
+   * If 2 sets have not empty intersection, then return false.
+   *
+   * @static
+   * @template T
+   * @param {...Set<T>[]} sets
+   * @memberof Sets
+   */
+  static areDisjoint<T>(firstSet: Set<T>, ...otherSets: Set<T>[]) {
+    for (const {a, b} of getDistinctCouples(firstSet, ...otherSets)) {
+      if (Sets.intersection(a, b).size > 0) {
         return false;
       }
     }
