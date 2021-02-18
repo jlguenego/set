@@ -1,5 +1,5 @@
 import {OrderedPair} from './../src/OrderedPair';
-import {Relation} from './../src';
+import {Relation, RelationOn} from './../src';
 import assert from 'assert';
 
 describe('Relation Unit Test', () => {
@@ -26,5 +26,15 @@ describe('Relation Unit Test', () => {
         new OrderedPair(3, 4),
       ])
     );
+  });
+  it('test reflexive', () => {
+    const equalRelation = new RelationOn<string>((a, b) => a === b);
+    const result = equalRelation.isReflexive(new Set(['toto', 'titi', 'tata']));
+    assert.deepStrictEqual(result, true);
+  });
+  it('test not_reflexive', () => {
+    const lessThan = new RelationOn<string>((a, b) => a < b);
+    const result = lessThan.isReflexive(new Set(['toto', 'titi', 'tata']));
+    assert.deepStrictEqual(result, false);
   });
 });
