@@ -1,9 +1,9 @@
 import {MemoCache as Memoizer} from './Memoizer';
 
-export class OrderedPair {
-  first!: string;
-  second!: number;
-  constructor(first: string, second: number) {
+export class OrderedPair<T, U> {
+  first!: T;
+  second!: U;
+  constructor(first: T, second: U) {
     this.first = first;
     this.second = second;
 
