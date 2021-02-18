@@ -195,6 +195,7 @@ export class RelationOn<T> extends Relation<T, T> {
     return true;
   }
 
+  // if you want to use mapping, then use javascript map (or simply object)
   isMapping(domain: Set<T>): boolean {
     for (const a of domain) {
       for (const b of domain) {
