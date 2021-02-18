@@ -20,4 +20,19 @@ export class RelationOn<T> extends Relation<T, T> {
     }
     return true;
   }
+
+  isTransitive(domain: Set<T>): boolean {
+    for (const a of domain) {
+      for (const b of domain) {
+        for (const c of domain) {
+          if (this.test(a, b) && this.test(b, c)) {
+            if (this.test(a, c) === false) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
 }
