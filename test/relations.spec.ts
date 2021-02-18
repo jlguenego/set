@@ -53,6 +53,11 @@ describe('Relation Unit Test', () => {
     const result = lessThan.isSymmetric(new Set(['toto', 'titi', 'tata']));
     assert.deepStrictEqual(result, false);
   });
+  it('test antisymmetric', () => {
+    const lessThan = new RelationOn<string>((a, b) => a <= b);
+    const result = lessThan.isAntiSymmetric(new Set(['toto', 'titi', 'tata']));
+    assert.deepStrictEqual(result, true);
+  });
   it('test transitive', () => {
     const equalRelation = new RelationOn<string>((a, b) => a === b);
     const result = equalRelation.isTransitive(

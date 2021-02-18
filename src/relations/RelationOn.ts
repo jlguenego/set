@@ -144,4 +144,16 @@ export class RelationOn<T> extends Relation<T, T> {
     }
     return true;
   }
+
+  isAntiSymmetric(domain: Set<T>): boolean {
+    for (const a of domain) {
+      for (const b of domain) {
+        // a<b and b<a => a=b
+        if (this.test(a, b) && this.test(b, a) && a !== b) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
