@@ -10,8 +10,9 @@ import {intersection} from './intersection';
  * @memberof Sets
  */
 export const areDisjoint = <T>(firstSet: Set<T>, ...otherSets: Set<T>[]) => {
-  for (const {a, b} of getDistinctCouples(firstSet, ...otherSets)) {
-    if (intersection(a, b).size > 0) {
+  const pairs = getDistinctCouples(firstSet, ...otherSets);
+  for (const pair of pairs) {
+    if (intersection(pair.first, pair.second).size > 0) {
       return false;
     }
   }

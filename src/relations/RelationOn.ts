@@ -124,4 +124,15 @@ export class RelationOn<T> extends Relation<T, T> {
   isPartialOrder(domain: Set<T>): boolean {
     return this.isTransitive(domain) && !this.isReflexive(domain);
   }
+
+  isAsymmetric(domain: Set<T>): boolean {
+    for (const a of domain) {
+      for (const b of domain) {
+        if (this.test(a, b) && this.test(b, a)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
