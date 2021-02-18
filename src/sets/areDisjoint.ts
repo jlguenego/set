@@ -1,4 +1,4 @@
-import {getDistinctCouples} from './couples';
+import {getDistinctCouples} from '../couples';
 import {intersection} from './intersection';
 
 /**
