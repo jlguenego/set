@@ -194,4 +194,17 @@ export class RelationOn<T> extends Relation<T, T> {
     }
     return true;
   }
+
+  isMapping(domain: Set<T>): boolean {
+    for (const a of domain) {
+      for (const b of domain) {
+        for (const c of domain) {
+          if (this.test(a, b) && this.test(a, c) && b !== c) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
 }
