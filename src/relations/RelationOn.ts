@@ -65,4 +65,8 @@ export class RelationOn<T> extends Relation<T, T> {
 
     return result;
   }
+
+  getEquivalenceIndex(domain: Set<T>): number {
+    return this.getEquivalenceClasses(domain).size;
+  }
 }

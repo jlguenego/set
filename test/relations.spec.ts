@@ -75,4 +75,10 @@ describe('Relation Unit Test', () => {
       new Set([new Set([0, 3]), new Set([1, 4]), new Set([2, 5])])
     );
   });
+  it('test equivalenceIndex', () => {
+    const domain = new Set(Array(6).keys());
+    const equalRelation = new RelationOn<number>((a, b) => a % 3 === b % 3);
+    const index = equalRelation.getEquivalenceIndex(domain);
+    assert.deepStrictEqual(index, 3);
+  });
 });
