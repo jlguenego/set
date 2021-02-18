@@ -98,7 +98,7 @@ export class RelationOn<T> extends Relation<T, T> {
     });
   }
 
-  buildRStar(domain: Set<T>): RelationOn<T> {
+  buildRPlus(domain: Set<T>): RelationOn<T> {
     const result = new Set<OrderedPair<T, T>>(this.getSet(domain));
     let ri = this as RelationOn<T>;
     let previousSize = 0;
@@ -109,6 +109,15 @@ export class RelationOn<T> extends Relation<T, T> {
       previousSize = size;
       size = result.size;
     }
+    return RelationOn.fromSet(result);
+  }
+
+  buildRStar(domain: Set<T>): RelationOn<T> {
+    const result = this.buildRPlus(domain).getSet(domain);
+    Sets.absorb(
+      result,
+      new RelationOn((t1: T, t2: T) => t1 === t2).getSet(domain)
+    );
     return RelationOn.fromSet(result);
   }
 }
