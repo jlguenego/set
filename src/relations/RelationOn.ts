@@ -120,4 +120,8 @@ export class RelationOn<T> extends Relation<T, T> {
     );
     return RelationOn.fromSet(result);
   }
+
+  isPartialOrder(domain: Set<T>): boolean {
+    return this.isTransitive(domain) && !this.isReflexive(domain);
+  }
 }
