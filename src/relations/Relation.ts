@@ -33,6 +33,14 @@ export class Relation<T, U> {
     return new Relation(inverseSpec);
   }
 
+  /**
+   * Get the set defining the relation, from a domain set and a range set.
+   *
+   * @param {Set<T>} domain
+   * @param {Set<U>} range
+   * @returns {Set<OrderedPair<T, U>>}
+   * @memberof Relation
+   */
   getSet(domain: Set<T>, range: Set<U>): Set<OrderedPair<T, U>> {
     const result = new Set<OrderedPair<T, U>>();
     for (const a of domain) {
