@@ -37,4 +37,14 @@ describe('Relation Unit Test', () => {
     const result = lessThan.isReflexive(new Set(['toto', 'titi', 'tata']));
     assert.deepStrictEqual(result, false);
   });
+  it('test symmetric', () => {
+    const equalRelation = new RelationOn<string>((a, b) => a === b);
+    const result = equalRelation.isSymmetric(new Set(['toto', 'titi', 'tata']));
+    assert.deepStrictEqual(result, true);
+  });
+  it('test not_symmetric', () => {
+    const lessThan = new RelationOn<string>((a, b) => a < b);
+    const result = lessThan.isSymmetric(new Set(['toto', 'titi', 'tata']));
+    assert.deepStrictEqual(result, false);
+  });
 });

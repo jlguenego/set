@@ -9,4 +9,15 @@ export class RelationOn<T> extends Relation<T, T> {
     }
     return true;
   }
+
+  isSymmetric(domain: Set<T>): boolean {
+    for (const a of domain) {
+      for (const b of domain) {
+        if (this.test(b, a) !== this.test(a, b)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
