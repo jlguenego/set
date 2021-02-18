@@ -6,11 +6,11 @@ export class MemoCache {
     const id = toIdString(o);
     const cached = MemoCache.map.get(id);
     if (cached) {
-      return cached as T;
+      return cached.deref() as T;
     }
-    MemoCache.map.set(id, o);
+    MemoCache.map.set(id, new WeakRef(o as Object));
     return o;
   }
 
-  static map = new Map<string, Object>();
+  static map = new Map<string, WeakRef<Object>>();
 }
