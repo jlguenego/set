@@ -92,4 +92,10 @@ describe('Relation Unit Test', () => {
     const index = equalRelation.getEquivalenceIndex(domain);
     assert.deepStrictEqual(index, 3);
   });
+  it('test linearOrder', () => {
+    const domain = new Set(Array(6).keys());
+    const lessThan = new RelationOn<number>((a, b) => a < b);
+    const result = lessThan.isLinearOrder(domain);
+    assert.deepStrictEqual(result, true);
+  });
 });

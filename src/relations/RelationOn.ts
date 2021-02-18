@@ -130,10 +130,6 @@ export class RelationOn<T> extends Relation<T, T> {
     return RelationOn.fromSet(result);
   }
 
-  isPartialOrder(domain: Set<T>): boolean {
-    return this.isTransitive(domain) && this.isIrreflexive(domain);
-  }
-
   isAsymmetric(domain: Set<T>): boolean {
     for (const a of domain) {
       for (const b of domain) {
@@ -150,6 +146,33 @@ export class RelationOn<T> extends Relation<T, T> {
       for (const b of domain) {
         // a<b and b<a => a=b
         if (this.test(a, b) && this.test(b, a) && a !== b) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  isPartialOrder(domain: Set<T>): boolean {
+    return this.isTransitive(domain) && this.isIrreflexive(domain);
+  }
+
+  isReflexivePartialOrder(domain: Set<T>): boolean {
+    return (
+      this.isTransitive(domain) &&
+      this.isReflexive(domain) &&
+      this.isAntiSymmetric(domain)
+    );
+  }
+
+  isLinearOrder(domain: Set<T>): boolean {
+    if (!this.isPartialOrder(domain)) {
+      return false;
+    }
+    for (const a of domain) {
+      for (const b of domain) {
+        // a<b or b<a or a=b
+        if (!(this.test(a, b) || this.test(b, a) || a === b)) {
           return false;
         }
       }
