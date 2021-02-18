@@ -179,4 +179,19 @@ export class RelationOn<T> extends Relation<T, T> {
     }
     return true;
   }
+
+  isReflexiveLinearOrder(domain: Set<T>): boolean {
+    if (!this.isReflexivePartialOrder(domain)) {
+      return false;
+    }
+    for (const a of domain) {
+      for (const b of domain) {
+        // a<=b or b<=a
+        if (!(this.test(a, b) || this.test(b, a))) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 }
