@@ -1,10 +1,10 @@
+import {OrderedPair} from '../OrderedPair';
+
 export type RelationSpec<T, U> = (t: T, u: U) => boolean;
 
 export class Relation<T, U> {
-  static fromCartesianSet<T, U>(set: Set<[T, U]>): Relation<T, U> {
-    return new Relation<T, U>(
-      (t, u) => [...set].find(([a, b]) => a === t && b === u) !== undefined
-    );
+  static fromCartesianSet<T, U>(set: Set<OrderedPair<T, U>>): Relation<T, U> {
+    return new Relation<T, U>((t, u) => set.has(new OrderedPair(t, u)));
   }
 
   constructor(public spec: RelationSpec<T, U>) {}
@@ -33,12 +33,12 @@ export class Relation<T, U> {
     return new Relation(inverseSpec);
   }
 
-  getSet(domain: Set<T>, range: Set<U>): Set<[T, U]> {
-    const result = new Set<[T, U]>();
+  getSet(domain: Set<T>, range: Set<U>): Set<OrderedPair<T, U>> {
+    const result = new Set<OrderedPair<T, U>>();
     for (const a of domain) {
       for (const b of range) {
         if (this.spec(a, b)) {
-          result.add([a, b]);
+          result.add(new OrderedPair(a, b));
         }
       }
     }
