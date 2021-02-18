@@ -3,6 +3,16 @@ import {OrderedPair} from '../OrderedPair';
 export type RelationSpec<T, U> = (t: T, u: U) => boolean;
 
 export class Relation<T, U> {
+  /**
+   * From a cartesian product set, get the relation object.
+   *
+   * @static
+   * @template T
+   * @template U
+   * @param {Set<OrderedPair<T, U>>} set
+   * @returns {Relation<T, U>}
+   * @memberof Relation
+   */
   static fromCartesianSet<T, U>(set: Set<OrderedPair<T, U>>): Relation<T, U> {
     return new Relation<T, U>((t, u) => set.has(new OrderedPair(t, u)));
   }
@@ -34,7 +44,7 @@ export class Relation<T, U> {
   }
 
   /**
-   * Get the set defining the relation, from a domain set and a range set.
+   * Get the cartesian product set defining the relation, from a domain set and a range set.
    *
    * @param {Set<T>} domain
    * @param {Set<U>} range
