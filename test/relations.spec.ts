@@ -33,10 +33,16 @@ describe('Relation Unit Test', () => {
     assert.deepStrictEqual(result, true);
   });
   it('test not_reflexive', () => {
+    const oneRone = RelationOn.fromSet(new Set([new OrderedPair(1, 1)]));
+    assert.deepStrictEqual(oneRone.isReflexive(new Set([1, 2])), false);
+    assert.deepStrictEqual(oneRone.isReflexive(new Set([1])), true);
+  });
+  it('test irreflexive', () => {
     const lessThan = new RelationOn<string>((a, b) => a < b);
     const result = lessThan.isReflexive(new Set(['toto', 'titi', 'tata']));
     assert.deepStrictEqual(result, false);
   });
+
   it('test symmetric', () => {
     const equalRelation = new RelationOn<string>((a, b) => a === b);
     const result = equalRelation.isSymmetric(new Set(['toto', 'titi', 'tata']));
