@@ -80,6 +80,10 @@ export class Sets {
 
   static includes = includes;
 
+  static properlyInclude = <T>(a: Set<T>, b: Set<T>): boolean => {
+    return Sets.includes(a, b) && !Sets.areEquals(a, b);
+  };
+
   static areDisjoint = areDisjoint;
 
   static powerSet = powerSet;
