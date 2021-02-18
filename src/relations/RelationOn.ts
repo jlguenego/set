@@ -1,6 +1,23 @@
+import {OrderedPair} from '../OrderedPair';
+import {Sets} from '../sets/Sets';
 import {Relation} from './Relation';
 
 export class RelationOn<T> extends Relation<T, T> {
+  static fromSet<T>(set: Set<OrderedPair<T, T>>): RelationOn<T> {
+    return new RelationOn<T>((t1, t2) => set.has(new OrderedPair(t1, t2)));
+  }
+
+  /**
+   * Returns the set defining the relation.
+   *
+   * @param {Set<T>} domain
+   * @returns {Set<OrderedPair<T, T>>}
+   * @memberof RelationOn
+   */
+  getSet(domain: Set<T>): Set<OrderedPair<T, T>> {
+    return super.getSet(domain, domain);
+  }
+
   isReflexive(domain: Set<T>): boolean {
     for (const a of domain) {
       if (!this.test(a, a)) {
@@ -68,5 +85,30 @@ export class RelationOn<T> extends Relation<T, T> {
 
   getEquivalenceIndex(domain: Set<T>): number {
     return this.getEquivalenceClasses(domain).size;
+  }
+
+  buildRNext(domain: Set<T>, r: RelationOn<T>): RelationOn<T> {
+    return new RelationOn<T>((a, b) => {
+      for (const {second: c} of this.getSet(domain)) {
+        if (this.test(a, c) && r.test(c, b)) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  buildRStar(domain: Set<T>): RelationOn<T> {
+    const result = new Set<OrderedPair<T, T>>(this.getSet(domain));
+    let ri = this as RelationOn<T>;
+    let previousSize = 0;
+    let size = result.size;
+    while (previousSize < size) {
+      ri = this.buildRNext(domain, ri);
+      Sets.absorb(result, ri.getSet(domain));
+      previousSize = size;
+      size = result.size;
+    }
+    return RelationOn.fromSet(result);
   }
 }
