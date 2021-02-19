@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "lib": ["ESNext"],
     "outDir": "build_esm",
     "module": "ES2015",
     "moduleResolution": "Node"
