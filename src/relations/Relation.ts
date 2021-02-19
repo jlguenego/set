@@ -62,4 +62,17 @@ export class Relation<T, U> {
     }
     return result;
   }
+
+  isMapping(domain: Set<T>, range: Set<U>): boolean {
+    for (const a of domain) {
+      for (const b of range) {
+        for (const c of range) {
+          if (this.test(a, b) && this.test(a, c) && b !== c) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
 }

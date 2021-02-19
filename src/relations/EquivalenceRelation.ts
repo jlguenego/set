@@ -1,13 +1,7 @@
 import {RelationOn} from './RelationOn';
 export class EquivalenceRelation<T> {
-  constructor(public r: RelationOn<T>, domain: Set<T>) {
-    if (
-      !(
-        this.r.isReflexive(domain) &&
-        this.r.isSymmetric(domain) &&
-        this.r.isTransitive(domain)
-      )
-    ) {
+  constructor(public r: RelationOn<T>, public domain: Set<T>) {
+    if (!r.isEquivalence(domain)) {
       throw new Error(
         'This is not an equivalence relation on the given domain'
       );

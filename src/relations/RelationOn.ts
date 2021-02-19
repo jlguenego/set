@@ -84,6 +84,14 @@ export class RelationOn<T> extends Relation<T, T> {
     return true;
   }
 
+  isEquivalence(domain: Set<T>) {
+    return (
+      this.isReflexive(domain) &&
+      this.isSymmetric(domain) &&
+      this.isTransitive(domain)
+    );
+  }
+
   isPartialOrder(domain: Set<T>): boolean {
     return this.isTransitive(domain) && this.isIrreflexive(domain);
   }
@@ -120,20 +128,6 @@ export class RelationOn<T> extends Relation<T, T> {
         // a<=b or b<=a
         if (!(this.test(a, b) || this.test(b, a))) {
           return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  // if you want to use mapping, then use javascript map (or simply object)
-  isMapping(domain: Set<T>): boolean {
-    for (const a of domain) {
-      for (const b of domain) {
-        for (const c of domain) {
-          if (this.test(a, b) && this.test(a, c) && b !== c) {
-            return false;
-          }
         }
       }
     }

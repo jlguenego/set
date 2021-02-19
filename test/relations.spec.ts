@@ -82,10 +82,4 @@ describe('Relation Unit Test', () => {
     const result = lessThan.isReflexiveLinearOrder(domain);
     assert.deepStrictEqual(result, true);
   });
-  it('test isMapping', () => {
-    const domain = new Set(Array(6).keys());
-    const aPower2 = new RelationOn<number>((a, b) => b === a ** 2);
-    const result = aPower2.isMapping(domain);
-    assert.deepStrictEqual(result, true);
-  });
 });
