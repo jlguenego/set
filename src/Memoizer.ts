@@ -1,4 +1,14 @@
-const toIdString = (o: Object): string => {
+/**
+ * Try to generate a unique id according the content of an object.
+ *
+ * @param {Object} o
+ * @returns {string}
+ */
+export const toIdString = (o: Object): string => {
+  if (typeof o === 'symbol') {
+    // warning: different symbols can have the same toString() result.
+    return 'symbol_' + o.toString();
+  }
   if (typeof o !== 'object') {
     return typeof o + '_' + o;
   }
