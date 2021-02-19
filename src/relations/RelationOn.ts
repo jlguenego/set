@@ -119,40 +119,6 @@ export class RelationOn<T> extends Relation<T, T> {
     return this.getEquivalenceClasses(domain).size;
   }
 
-  buildRNext(domain: Set<T>, r: RelationOn<T>): RelationOn<T> {
-    return new RelationOn<T>((a, b) => {
-      for (const {second: c} of this.getSet(domain)) {
-        if (this.test(a, c) && r.test(c, b)) {
-          return true;
-        }
-      }
-      return false;
-    });
-  }
-
-  buildRPlus(domain: Set<T>): RelationOn<T> {
-    const result = new Set<OrderedPair<T, T>>(this.getSet(domain));
-    let ri = this as RelationOn<T>;
-    let previousSize = 0;
-    let size = result.size;
-    while (previousSize < size) {
-      ri = this.buildRNext(domain, ri);
-      Sets.absorb(result, ri.getSet(domain));
-      previousSize = size;
-      size = result.size;
-    }
-    return RelationOn.fromSet(result);
-  }
-
-  buildRStar(domain: Set<T>): RelationOn<T> {
-    const result = this.buildRPlus(domain).getSet(domain);
-    Sets.absorb(
-      result,
-      new RelationOn((t1: T, t2: T) => t1 === t2).getSet(domain)
-    );
-    return RelationOn.fromSet(result);
-  }
-
   isPartialOrder(domain: Set<T>): boolean {
     return this.isTransitive(domain) && this.isIrreflexive(domain);
   }
