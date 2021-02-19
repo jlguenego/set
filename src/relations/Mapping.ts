@@ -28,4 +28,21 @@ export class Mapping<T, U> {
     }
     return true;
   }
+  isPartial() {
+    return !this.isTotal();
+  }
+  isInjection() {
+    for (const b of this.range) {
+      let count = 0;
+      for (const a of this.domain) {
+        if (this.r.test(a, b)) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
