@@ -83,4 +83,13 @@ describe('Mapping Unit Test', () => {
     );
     assert.deepStrictEqual(m.isBijection(), true);
   });
+  it('test getInverse', () => {
+    const m = new Mapping(
+      new RelationOn<number>((a, b) => b === a * a),
+      new Set(Array(10).keys()),
+      new Set(Array(50).keys())
+    );
+    const mapping = m.getInverse();
+    assert.deepStrictEqual(mapping.get(36), 6);
+  });
 });

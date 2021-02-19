@@ -11,6 +11,15 @@ export class Mapping<T, U> {
     }
   }
 
+  get(a: T): U | undefined {
+    for (const b of this.range) {
+      if (this.r.test(a, b)) {
+        return b;
+      }
+    }
+    return undefined;
+  }
+
   isDefined(a: T) {
     for (const b of this.range) {
       if (this.r.test(a, b)) {
@@ -65,5 +74,18 @@ export class Mapping<T, U> {
 
   isBijection() {
     return this.isInjection() && this.isSurjection();
+  }
+
+  getInverse(): Mapping<U, T> {
+    if (!this.isInjection()) {
+      throw new Error(
+        'Cannot get the inverse because this mapping is not an injection'
+      );
+    }
+    return new Mapping<U, T>(
+      new Relation<U, T>((u, t) => this.r.spec(t, u)),
+      this.range,
+      this.domain
+    );
   }
 }
