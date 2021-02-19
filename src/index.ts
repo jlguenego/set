@@ -3,4 +3,5 @@ export * from './couples';
 export * from './relations/Relation';
 export * from './relations/RelationOn';
 export * from './relations/RelationClosure';
+export * from './relations/EquivalenceRelation';
 export * from './OrderedPair';

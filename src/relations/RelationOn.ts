@@ -1,5 +1,4 @@
 import {OrderedPair} from '../OrderedPair';
-import {Sets} from '../sets/Sets';
 import {Relation} from './Relation';
 
 export class RelationOn<T> extends Relation<T, T> {
@@ -83,40 +82,6 @@ export class RelationOn<T> extends Relation<T, T> {
       }
     }
     return true;
-  }
-
-  isEquivalenceRelation(domain: Set<T>): boolean {
-    return (
-      this.isReflexive(domain) &&
-      this.isSymmetric(domain) &&
-      this.isTransitive(domain)
-    );
-  }
-
-  getEquivalenceClasses(domain: Set<T>): Set<Set<T>> {
-    const result = new Set<Set<T>>();
-    for (const a of domain) {
-      let found = false;
-      for (const eqClass of result) {
-        const b = [...eqClass][0];
-        if (this.test(a, b)) {
-          eqClass.add(a);
-          found = true;
-          break;
-        }
-      }
-      if (found === false) {
-        result.add(
-          new Set<T>([a])
-        );
-      }
-    }
-
-    return result;
-  }
-
-  getEquivalenceIndex(domain: Set<T>): number {
-    return this.getEquivalenceClasses(domain).size;
   }
 
   isPartialOrder(domain: Set<T>): boolean {

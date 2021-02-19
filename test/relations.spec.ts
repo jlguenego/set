@@ -70,28 +70,6 @@ describe('Relation Unit Test', () => {
     const result = lessThan.isTransitive(new Set(['toto', 'titi', 'tata']));
     assert.deepStrictEqual(result, true);
   });
-  it('test equivalenceRelation', () => {
-    const equalRelation = new RelationOn<string>((a, b) => a === b);
-    const result = equalRelation.isEquivalenceRelation(
-      new Set(['toto', 'titi', 'tata'])
-    );
-    assert.deepStrictEqual(result, true);
-  });
-  it('test equivalenceClasses', () => {
-    const domain = new Set(Array(6).keys());
-    const equalRelation = new RelationOn<number>((a, b) => a % 3 === b % 3);
-    const classes = equalRelation.getEquivalenceClasses(domain);
-    assert.deepStrictEqual(
-      classes,
-      new Set([new Set([0, 3]), new Set([1, 4]), new Set([2, 5])])
-    );
-  });
-  it('test equivalenceIndex', () => {
-    const domain = new Set(Array(6).keys());
-    const equalRelation = new RelationOn<number>((a, b) => a % 3 === b % 3);
-    const index = equalRelation.getEquivalenceIndex(domain);
-    assert.deepStrictEqual(index, 3);
-  });
   it('test linearOrder', () => {
     const domain = new Set(Array(6).keys());
     const lessThan = new RelationOn<number>((a, b) => a < b);
