@@ -53,8 +53,8 @@ export class Sets {
    */
   static difference<T>(a: Set<T>, b: Set<T>): Set<T> {
     const result = new Set<T>();
-    for (const e of b) {
-      if (!a.has(e)) {
+    for (const e of a) {
+      if (!b.has(e)) {
         result.add(e);
       }
     }

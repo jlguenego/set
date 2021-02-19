@@ -49,7 +49,7 @@ describe('Operations Unit Test', () => {
     const a = new Set([1, 2, 6]);
     const b = new Set([3, 2, 1]);
     const c = Sets.difference(a, b);
-    assert.deepStrictEqual(c, new Set([3]));
+    assert.deepStrictEqual(c, new Set([6]));
   });
   it('test disjoint', () => {
     const a = new Set([1, 2]);
