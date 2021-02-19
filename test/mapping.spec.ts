@@ -59,4 +59,28 @@ describe('Mapping Unit Test', () => {
     );
     assert.deepStrictEqual(m.isInjection(), false);
   });
+  it('test isSurjection_false', () => {
+    const m = new Mapping(
+      new RelationOn<number>((a, b) => b === a * a),
+      new Set(Array(10).keys()),
+      new Set(Array(50).keys())
+    );
+    assert.deepStrictEqual(m.isSurjection(), false);
+  });
+  it('test isSurjection_true', () => {
+    const m = new Mapping(
+      new RelationOn<number>((a, b) => b === a * a),
+      new Set(Array(10).keys()),
+      new Set(Array(2).keys())
+    );
+    assert.deepStrictEqual(m.isSurjection(), true);
+  });
+  it('test isBijection_true', () => {
+    const m = new Mapping(
+      new RelationOn<number>((a, b) => b === a * a),
+      new Set(Array(2).keys()),
+      new Set(Array(2).keys())
+    );
+    assert.deepStrictEqual(m.isBijection(), true);
+  });
 });

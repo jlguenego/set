@@ -31,18 +31,39 @@ export class Mapping<T, U> {
   isPartial() {
     return !this.isTotal();
   }
+
   isInjection() {
     for (const b of this.range) {
       let count = 0;
       for (const a of this.domain) {
         if (this.r.test(a, b)) {
           count++;
+          if (count > 1) {
+            return false;
+          }
         }
       }
-      if (count > 1) {
+    }
+    return true;
+  }
+
+  isSurjection() {
+    for (const b of this.range) {
+      let count = 0;
+      for (const a of this.domain) {
+        if (this.r.test(a, b)) {
+          count++;
+          break;
+        }
+      }
+      if (count === 0) {
         return false;
       }
     }
     return true;
+  }
+
+  isBijection() {
+    return this.isInjection() && this.isSurjection();
   }
 }
