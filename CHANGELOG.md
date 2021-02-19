@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/jlguenego/set/compare/v1.0.1...v1.1.0) (2021-02-19)
+
+
+### Features
+
+* adding export to memoizer ([97c83d9](https://github.com/jlguenego/set/commit/97c83d90271682a9b2a8e3e121b8bde0e2b1a039))
+
+
+### Bug Fixes
+
+* tsconfig.esm.json ([5ac696a](https://github.com/jlguenego/set/commit/5ac696a5d64ff66217493e1fe740a19d46e7b574))
+
 ### [1.0.1](https://github.com/jlguenego/set/compare/v1.0.0...v1.0.1) (2021-02-19)
 
 
