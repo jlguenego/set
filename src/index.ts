@@ -6,3 +6,4 @@ export * from './relations/RelationClosure';
 export * from './relations/EquivalenceRelation';
 export * from './relations/Mapping';
 export * from './OrderedPair';
+export * from './Memoizer';
