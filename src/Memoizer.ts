@@ -36,5 +36,14 @@ export class MemoCache {
     return o;
   }
 
+  static retrieveFromCache<T>(o: T): T | undefined {
+    const id = toIdString(o);
+    const cached = MemoCache.map.get(id);
+    if (cached === undefined) {
+      return undefined;
+    }
+    return cached.deref() as T;
+  }
+
   static map = new Map<string, WeakRef<Object>>();
 }
