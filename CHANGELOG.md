@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/jlguenego/set/compare/v1.2.0...v1.3.0) (2021-02-24)
+
+
+### Features
+
+* improved toIdString for set ([86b4136](https://github.com/jlguenego/set/commit/86b413619725c5ab874aefb53b444e1635cf5a96))
+
 ## [1.2.0](https://github.com/jlguenego/set/compare/v1.1.0...v1.2.0) (2021-02-24)
 
 
