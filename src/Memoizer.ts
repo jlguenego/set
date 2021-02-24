@@ -1,11 +1,11 @@
-import {SHA3} from 'sha3';
-
-// const hash = new SHA3(256);
-
-const hash = (str: string) => {
-  const sha3 = new SHA3(512);
-  sha3.update(str);
-  return sha3.digest('hex');
+const hashCode = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const character = str.charCodeAt(i);
+    hash = (hash << 5) - hash + character;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
 };
 
 /**
@@ -17,27 +17,27 @@ const hash = (str: string) => {
 export const toIdString = (o: Object): string => {
   if (typeof o === 'symbol') {
     // warning: different symbols can have the same toString() result.
-    return hash('symbol_' + o.toString());
+    return 'symbol_' + o.toString();
   }
   if (typeof o !== 'object') {
-    return hash(typeof o + '_' + o);
+    return typeof o + '_' + o;
   }
   if (o instanceof Set) {
-    return hash('Set' + toIdString([...o]));
+    return 'Set' + toIdString([...o]);
   }
-  return hash(
+  return (
     o.constructor.name +
-      '{' +
-      Object.keys(o)
-        .map(key => key + '=' + toIdString((o as {[key: string]: Object})[key]))
-        .join(',') +
-      '}'
+    '{' +
+    Object.keys(o)
+      .map(key => key + '=' + toIdString((o as {[key: string]: Object})[key]))
+      .join(',') +
+    '}'
   );
 };
 
 export class MemoCache {
   static handle<T>(o: T): T {
-    const id = toIdString(o);
+    const id = hashCode(toIdString(o));
     const cached = MemoCache.map.get(id);
     if (cached) {
       return cached.deref() as T;
@@ -47,7 +47,7 @@ export class MemoCache {
   }
 
   static retrieveFromCache<T>(o: T): T | undefined {
-    const id = toIdString(o);
+    const id = hashCode(toIdString(o));
     const cached = MemoCache.map.get(id);
     if (cached === undefined) {
       return undefined;
@@ -55,5 +55,5 @@ export class MemoCache {
     return cached.deref() as T;
   }
 
-  static map = new Map<string, WeakRef<Object>>();
+  static map = new Map<number, WeakRef<Object>>();
 }
