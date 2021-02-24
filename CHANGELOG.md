@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/jlguenego/set/compare/v1.1.0...v1.2.0) (2021-02-24)
+
+
+### Features
+
+* added retrieveFromCache ([e1c1364](https://github.com/jlguenego/set/commit/e1c1364bdd1ba82a42ceb7d4bf7ee658108343ca))
+
+
+### Bug Fixes
+
+* symbol and crash ([b6e5e40](https://github.com/jlguenego/set/commit/b6e5e407de71a99b88cd0e756dd88bfb85819359))
+
 ## [1.1.0](https://github.com/jlguenego/set/compare/v1.0.1...v1.1.0) (2021-02-19)
 
 
