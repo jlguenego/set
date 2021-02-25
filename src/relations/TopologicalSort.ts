@@ -1,9 +1,11 @@
+import {RelationClosure} from '..';
 import {RelationOn} from './RelationOn';
 export const topologicalSort = <T>(
   partialOrder: RelationOn<T>,
   domain: Set<T>
 ): RelationOn<T> => {
-  if (!partialOrder.isPartialOrder(domain)) {
+  const starOrder = RelationClosure.buildRPlus(domain, partialOrder);
+  if (!starOrder.isPartialOrder(domain)) {
     throw new Error('Cannot do a topological sort on non partial order');
   }
   const ai = new Set(domain);

@@ -17,4 +17,19 @@ describe('Order Unit Test', () => {
     const result = linear.isLinearOrder(domain);
     assert.deepStrictEqual(result, true);
   });
+
+  it('test topologicalOrder025', () => {
+    const domain = new Set(['a', 'b', 'c', 'd']);
+    const partial = RelationOn.fromSet(
+      new Set([
+        new OrderedPair('a', 'b'),
+        new OrderedPair('a', 'c'),
+        new OrderedPair('b', 'd'),
+        new OrderedPair('c', 'd'),
+      ])
+    );
+    const linear = topologicalSort(partial, domain);
+    const result = linear.isLinearOrder(domain);
+    assert.deepStrictEqual(result, true);
+  });
 });
