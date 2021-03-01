@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/jlguenego/set/compare/v1.3.1...v1.4.0) (2021-03-01)
+
+
+### Features
+
+* topological sort ([49bffe1](https://github.com/jlguenego/set/commit/49bffe1bf8dd438362e2cee4e5f998e4ef9f64b1))
+
+
+### Bug Fixes
+
+* partial order notion ([f62201d](https://github.com/jlguenego/set/commit/f62201d87cc64381b159d5ae815c7842035fa725))
+
 ### [1.3.1](https://github.com/jlguenego/set/compare/v1.3.0...v1.3.1) (2021-02-24)
 
 
